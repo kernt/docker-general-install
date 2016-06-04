@@ -18,4 +18,5 @@ scp ucp-1.1.1_dtr-2.0.1.tar.gz $USER@$UCP_HOST:/tmp
 
 for ((i = 0; i <= max_index; i++)); do
   echo "Element $i: '${UCP_Host[i]}'"
+  ssh $UCP_USER@$i
 done
