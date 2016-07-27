@@ -2,24 +2,29 @@
 #
 #
 #
-#
+# Source: 
 
 curl -L https://github.com/docker/machine/releases/download/v0.7.0/docker-machine-`uname -s`-`uname -m` > /usr/local/bin/docker-machine && \
 chmod +x /usr/local/bin/docker-machine
 
 
+#/etc/bash_completion.d
+
+# To enable the docker-machine shell prompt
+# is corently not working . 
+#PS1='[\u@\h \W$(__docker_machine_ps1)]\$ ' >> ~/.bashrc
+
 echo "$(docker-machine version)\n installed"
 #Installing bash completion scripts
 
-COMPLITION_ENV(
- https://raw.githubusercontent.com/docker/machine/master/contrib/completion/bash/docker-machine-wrapper.bash
- https://raw.githubusercontent.com/docker/machine/master/contrib/completion/bash/docker-machine-prompt.bash
- https://raw.githubusercontent.com/docker/machine/master/contrib/completion/bash/docker-machine.bash
- )
+COMPLITION=( "https://raw.githubusercontent.com/docker/machine/master/contrib/completion/bash/docker-machine-wrapper.bash" "https://raw.githubusercontent.com/docker/machine/master/contrib/completion/bash/docker-machine-prompt.bash" "https://raw.githubusercontent.com/docker/machine/master/contrib/completion/bash/docker-machine.bash" )
 
-for ((i = 0; i <= max_index; i++)); do
-  echo "Element $i: '${COMPLITION_ENV[i]}'"
-done
+for i in "${COMPLITION[@]}"
+ do
+     wget  $i
+ done
+
+
  
 docker-machine version
 
