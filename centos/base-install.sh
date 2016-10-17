@@ -1,4 +1,10 @@
 #!/bin/bash
+# Source : https://docs.docker.com/engine/installation/linux/centos/
+
+# yum update 
+sudo yum update
+
+# Add the yum repo 
 sudo tee /etc/yum.repos.d/docker.repo <<-'EOF'
 [dockerrepo]
 name=Docker Repository
@@ -8,18 +14,17 @@ gpgcheck=1
 gpgkey=https://yum.dockerproject.org/gpg
 EOF
 
-sudo yum install docker-engine
+echo "Found Kernel : $(uname -r) "
 
-udo docker run hello-world
+sudo yum install docker-engine 
 
-sudo yum update
+# enable docker 
+sudo systemctl enable docker.service
 
-curl -fsSL https://get.docker.com/ | sh
-
-
+# start docker 
 sudo service docker start
 
-docker run hello-world
+# Test docker 
+sudo docker run --rm hello-world
 
-sudo chkconfig docker on
-
+exit 0 
