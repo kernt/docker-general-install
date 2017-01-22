@@ -5,8 +5,9 @@
 
 cp ./docker-tcp.socket /etc/systemd/system/
 
-systemctl enable docker-tcp.socket
-systemctl stop docker
-systemctl start docker-tcp.socket
+sudo systemctl daemon-reload
+sudo systemctl enable docker-tcp.socket
+sudo systemctl stop docker
+sudo systemctl start docker-tcp.socket
 
 exit 0
